@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixtures</title>
+    <!--Initialise Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-functions.js"></script>
+
+    <script>
+        //Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDl6e5wt5pY3MKXjqIFXCAt6ekjmRBNnKQ",
+            authDomain: "u3a-f8feb.firebaseapp.com",
+            databaseURL: "https://u3a-f8feb.firebaseio.com",
+            projectId: "u3a-f8feb",
+            storageBucket: "u3a-f8feb.appspot.com",
+            messagingSenderId: "700139248834",
+            appId: "1:700139248834:web:cfcaa65109f694657fef5b",
+            measurementId: "G-MYETP20EFY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        var database = firebase.database();
+    </script>
+    <!--style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <nav class="z-depth-0 grey lighten-4">
+        <div class="nav-wrapper container">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="fixture.html" class="grey-text active">Home</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="booking.html" class="grey-text">Create Fixture</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="scores.html" class="grey-text" >Input Scores</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="sbooking.html" class="grey-text" >Create Wednesday Fixture</a>
+                </li>
+                <li>
+                    <a href="currentb.html" class="grey-text" >Current Bookings</a>
+                </li>
+            </ul>
+            <!--modal for Wednesday Fixture availability-->
+            <ul id="nav-mobile" class="left">
+                <li class="admin" style="display: none;">
+                    <a href="#" class="button grey-text modal-trigger" data-target="availability">Fixtures Available</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h4 class="center grey-text">Wednesday Timetable</h4>
+
+    <!--Create user for Wednesday scheme -->
+    <div class="admin" style="display: none;">
+        <div class="center-align admin-actions" style="margin: 40px auto; max-width: 300px;">
+            <input type="email" placeholder="User email" id="wednesdayEmail" required />
+            <div>
+                <input type="button" class="center-align btn-small blue darken-2 z-depth-0" value="Make Wednesday member"
+                onclick="wednesdayUser()">
+            </div>
+        </div>
+    </div>  
+
+    <!-- Availability Modal -->
+    <div id="availability" class="modal">
+        <div class="modal-content">
+            <div class="content">
+                <h4>Availability</h4><br/>
+                <h7>Please tick venues that are available next week</h7> <br>
+                <br>
+            </div>
+            <button class="btn blue darken-2 z-depth-0" onclick="availability()">Confirm</button>
+        </div>
+
+    </div>
+
+    <!--Fixture list-->
+    <div class="container" style="margin-top: 40px;">
+        <ul class="collapsible z-depth-0 guides" style="border: none;">
+        </ul>
+    </div>
+
+    <!--javascript-->
+    <script type="text/javascript" src="timetable.js"></script>
+    <script type="text/javascript" src="firebase.js"></script>
+
+    <!--log user out-->
+    <div>
+        <input type="button" class="btn btn-lg btn-primary" value="Log Out"
+            onclick="logout_user()">
+    </div>
+    </script>
+    
+</body>
+</html>

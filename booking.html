@@ -1,0 +1,179 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Booking form</title>
+    
+    <!--firebase sources-->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-functions.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <script>
+		//Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyDl6e5wt5pY3MKXjqIFXCAt6ekjmRBNnKQ",
+			authDomain: "u3a-f8feb.firebaseapp.com",
+			databaseURL: "https://u3a-f8feb.firebaseio.com",
+			projectId: "u3a-f8feb",
+			storageBucket: "u3a-f8feb.appspot.com",
+			messagingSenderId: "700139248834",
+			appId: "1:700139248834:web:cfcaa65109f694657fef5b",
+			measurementId: "G-MYETP20EFY"
+		};
+		firebase.initializeApp(firebaseConfig);
+		firebase.analytics();
+		var database = firebase.database();
+    </script>
+
+
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <nav class="z-depth-0 grey lighten-4">
+        <div class="nav-wrapper container">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="fixture.html" class="grey-text">Home</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="scores.html" class="grey-text" >Input Scores</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="sbooking.html" class="grey-text" >Input Wednesday Fixture</a>
+                </li>
+                <li class="admin wednesday" style="display: none;">
+                    <a href="timetable.html" class="grey-text" >Wednesday Timetable</a>
+                </li>
+                <li>
+                    <a href="currentb.html" class="grey-text" >Current Bookings</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h4 class="center grey-text">Fixture Input Page</h4>
+
+
+    <form>
+        <fieldset>
+            <label for="fixture_name"> Name: </label>
+            <input type="text" name="fixture_name" id="fixture_name" placeholder="Name of Venue" pattern="[a-zA-Z]{3,}" title="Please enter in more than 3 letters">
+
+            <div>
+                <label for="fixture_date">Date: </label>
+                <input type="date" name="fixture_date" id="fixture_date"  min="2020-01-20" title="Please enter in a date">
+            </div>
+            
+        </fieldset>
+
+        <fieldset>
+                <legend>Address: </legend>
+
+                <!-- address-line1 input-->
+                <div >
+                    <label class="control-label">Address Line 1</label>
+                    <div class="controls">
+                        <input id="fixture_address1" name="fixture_address1" type="text" placeholder="address line 1" class="input-xlarge">
+                    </div>
+                </div>
+                <!-- address-line2 input-->
+                <div >
+                    <label class="control-label">Address Line 2</label>
+                    <div class="controls">
+                        <input id="fixture_address2" name="fixture_address2" type="text" placeholder="address line 2" class="input-xlarge">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- region input-->
+                    <div  class="input-field col s6">
+                        <div class="controls">
+                            <input id="fixture_region" name="fixture_region" type="text" placeholder="state / province / region" class="input-xlarge">
+                        </div>
+                    </div>
+                    <!-- postal-code input-->
+                    <div  class="input-field col s6">
+                        <div class="controls">
+                            <input id="fixture_postalCode" name="fixture_postalCode" type="text" placeholder="zip or postal code" class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                </div>
+        </fieldset>
+        <br>
+
+        <fieldset>
+            <legend>Booking Details: </legend>
+            
+            <!--price-->
+            <div>
+                <label for="price">Enter the price of the fixture</label>
+                <input type="number" name="price" id="price" min="1" max="100">
+            </div>
+
+            <!--Buggy availability-->
+            <label>
+                <input type="checkbox" id="buggyAvailability" />
+                <span>Buggy available at venue</span>
+            </label>
+
+            <!--Maximum number-->
+            <div>
+                <label for="maximumBookings">Enter the maximum number of bookings - 1=flat land/easy to walk around, 5=steep gradient of hills/difficult to access areas</label>
+                <input type="number" name="maximumBookings" id="maximumBookings" min="1" max="100">
+            </div>
+
+            <!--mobility factor-->
+            <div>
+                <label for="mobFactor">Enter mobility factor of venue</label>
+                <input type="number" name="fixture_mobFactor" id="fixture_mobFactor" min="1" max="5">
+            </div>
+
+            <!--Number of holes-->
+            <div>
+                <label for="time9"> 9 Holes </label>
+                <input type="time" id="time9" name="time9" min="07:00" max="18:00">
+
+                <label for="time12">12 Holes</label>
+                <input type="time" id="time12" name="time12" min="07:00" max="18:00">
+
+                <label type="time18">18 Holes</label>
+                <input type="time" id="time18" name="time12" min="07:00" max="18:00">
+            </div>
+
+            <!--Comment on food-->
+            <div>
+                <label for="food">Details on food: </label>
+                <textarea name="food" id="food" rows="4"></textarea>
+            </div>
+
+            <!--Additional comments-->
+            <div>
+                <label for="comments">Additional Comments (Included? Allergens?): </label>
+                <textarea name="comments" id="comments" rows="4"></textarea>
+            </div>
+
+            <!--save all inputs into firebase-->
+            <div>
+                <input type="button" class="btn btn-lg btn-primary" value="Save" onclick="save_fixture()">
+            </div>
+        </fieldset>
+    </form>
+    <div>
+        <input type="button" class="btn btn-lg btn-primary" value="Log Out"
+            onclick="logout_user()">
+    </div>
+
+    <script type="text/javascript" src="booking.js"></script>
+    <script type="text/javascript" src="firebase.js"></script>
+
+</body>
+</html>
